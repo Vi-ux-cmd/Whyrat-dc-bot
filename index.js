@@ -68,15 +68,6 @@ client.on('messageCreate', async message => {
     }
   });
 
-  // ===== AUTO REPLIES =====
-  if (msg === "hi" || msg === "hello") {
-    return message.reply("👋 Hello!");
-  }
-
-  if (msg === "food") {
-    return message.reply("🍔 Here is your food!");
-  }
-
   // ===== BAD WORD FILTER (SAFE) =====
   if (!isAdmin && !isOwner) {
     if (badWords.some(word => msg.includes(word))) {
