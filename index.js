@@ -1,4 +1,17 @@
+const {
+    Client,
+    GatewayIntentBits
+} = require('discord.js');
+
 const fs = require('fs');
+
+const client = new Client({
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent
+    ]
+});
 
 const swearWords = [
     "fuck",
@@ -29,6 +42,10 @@ function saveSwears() {
 function saveAfk() {
     fs.writeFileSync('./afk.json', JSON.stringify(afkData, null, 2));
 }
+
+client.once('ready', () => {
+    console.log(`${client.user.tag} is online!`);
+});
 
 client.on('messageCreate', async (message) => {
 
@@ -161,3 +178,5 @@ client.on('messageCreate', async (message) => {
     }
 
 });
+
+client.login(process.env.TOKEN);
